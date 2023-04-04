@@ -1,0 +1,26 @@
+<html>
+    <head lang=en>
+        <title>Hashing</title>
+    </head>
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha256.js"></script>
+        <script>
+            function generateHash(){
+                var secret_word = document.getElementById("secret_input").value;
+                var hash = CryptoJS.SHA256(secret_word);
+                document.getElementById("output").innerHTML = hash;
+            }
+        </script>
+        <h1>Hashing Algorithm</h1>
+
+        <input type="text" id="secret_input">
+        <button type="button" id="generate_btm" onclick="generateHash()">Generate</button>
+
+        <h4>
+            OUTPUT:
+            <p id="output"></p>
+        </h4>
+    </body>
+</html>
+
