@@ -7,20 +7,117 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha256.js"></script>
         <script>
             function generateHash(){
+
+                const max_chapters = 51;
+                const max_pages = 3;
+                const max_line_range = 12;
+                const max_word_range = 12;
+                const seed_starting_block = 4;
+                const seed_length = 3;
+
                 var secret_word = document.getElementById("secret_input").value;
-                var hash = CryptoJS.SHA256(secret_word);
-                document.getElementById("output").innerHTML = hash;
+                let hash = CryptoJS.SHA256(secret_word).toString();
+                document.getElementById("output").value = hash;
+
+                for(let i = 0; i < 16; i+=2){
+
+                    let tmp = 0;
+
+                    for(let j = 0; j < 8; j+=2){
+                        
+                        document.getElementById("out").innerHTML += hash.slice(i * 4 + j, i * 4 + j + 2);
+
+                        tmp += parseInt(hash.slice(i * 4 + j, i * 4 + j + 2), 16);
+                    }
+                    
+                    document.getElementById("out").innerHTML += " -> ";
+                    document.getElementById("out").innerHTML += tmp;
+                    document.getElementById("out").innerHTML += "<br \>";
+
+                    if(i == 0){
+                        document.getElementById("chapter_box").value = (tmp % max_chapters) + 1;
+                    }
+
+                    if(i == (1 * 2)){
+
+                        document.getElementById("page_box").value = (tmp % max_pages) + 1;
+                    }
+
+                    if(i == (2 * 2)){
+
+                        document.getElementById("page_dir_box").value = (tmp % 2);
+                    }
+
+                    if(i == (3 * 2)){
+
+                        document.getElementById("line_box").value = (tmp % max_line_range) + 1;
+                    }
+
+                    if(i == (4 * 2)){
+
+                        document.getElementById("line_dir_box").value = (tmp % 2);
+                    }
+
+                    if(i == (5 * 2)){
+
+                        document.getElementById("word1").value = (tmp % max_word_range) + 1;
+                    }
+
+                    if(i == (6 * 2)){
+
+                        document.getElementById("word2").value = (tmp % max_word_range) + 1;
+                    }
+
+                    if(i == (7 * 2)){
+
+                        document.getElementById("word3").value = (tmp % max_word_range) + 1;
+                    }
+
+                }
+
             }
         </script>
         <h1>Hashing Algorithm</h1>
 
         <input type="text" id="secret_input">
-        <button type="button" id="generate_btm" onclick="generateHash()">Generate</button>
+        <button type="button" id="generate_btm" onclick="generateHash()">Encrypt</button>
 
         <h4>
             OUTPUT:
-            <p id="output"></p>
         </h4>
+        <input type="text" id="output" size="70">
+        <p id="out"></p>
+
+        <p>
+        <label id="chapter" >Chapter
+        <input id="chapter_box" size="5">
+        </p>
+
+        <p>
+        <label id="page">Page
+        <input id="page_box" size="5">
+        </p>
+
+        <p>
+        <label id="page_dir">Page Direction</label>
+        <input id="page_dir_box" size="5">
+        </p>
+
+        <p>
+        <label id="line">Line</label>
+        <input id="line_box" size="5">
+        </p>
+
+        <p>
+        <label id="line_dir">Line Direction</label>
+        <input id="line_dir_box" size="5">
+        </p>
+
+        <p>
+        <input id="word1" size="5">
+        <input id="word2" size="5">
+        <input id="word3" size="5">
+        </p>
     </body>
 </html>
 
