@@ -18,6 +18,7 @@
                 var secret_word = document.getElementById("secret_input").value;
                 let hash = CryptoJS.SHA256(secret_word).toString();
                 document.getElementById("output").value = hash;
+                document.getElementById("out").innerHTML = "";
 
                 for(let i = 0; i < 16; i+=2){
 
